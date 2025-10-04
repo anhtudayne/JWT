@@ -1,0 +1,98 @@
+### JWT Spring Boot 3 API Testing
+
+# Base URL
+@baseUrl = http://localhost:8005
+
+### 1. Register new user (returns full user info)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "VoVanTu",
+  "email": "t@hcmute.edu.vn",
+  "password": "password123",
+  "images": "profile.jpg"
+}
+
+### 2. Login user (returns JWT token)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "tu@hcmute.edu.vn",
+  "password": "password123"
+}
+
+### 3. Get current user info (requires JWT token)
+# First run login to get token, then replace YOUR_JWT_TOKEN_HERE
+GET {{baseUrl}}/users/me
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+
+### 4. Get user by ID (requires JWT token)
+GET {{baseUrl}}/users/1
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+### 5. Register another user for testing
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Nguyễn Hữu Trung",
+  "email": "trungnh@hcmute.edu.vn",
+  "password": "password123",
+  "images": "profile.jpg"
+}
+
+### 6. Login with second user
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "trungnh@hcmute.edu.vn",
+  "password": "password123"
+}
+
+### 7. Test invalid login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "wrong@hcmute.edu.vn",
+  "password": "wrongpassword"
+}
+
+### 8. Test accessing protected endpoint without token
+GET {{baseUrl}}/users/me
+
+### 9. Test accessing protected endpoint with invalid token
+GET {{baseUrl}}/users/me
+Authorization: Bearer invalid_token_here
+
+### 10. Test validation - Register with invalid email
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Test User",
+  "email": "invalid-email",
+  "password": "password123"
+}
+
+### 11. Test validation - Register with missing fields
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@hcmute.edu.vn"
+}
+
+### 12. Test duplicate email registration
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Duplicate User",
+  "email": "tu@hcmute.edu.vn",
+  "password": "password123"
+}

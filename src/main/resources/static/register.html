@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT Register - Spring Boot 3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .register-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            max-width: 450px;
+            width: 100%;
+        }
+        .register-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .register-header h2 {
+            color: #333;
+            font-weight: 600;
+        }
+        .form-control {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 12px 15px;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .btn-register {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-weight: 600;
+            width: 100%;
+        }
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .alert {
+            border-radius: 10px;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .login-link a {
+            color: #667eea;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="register-card">
+                    <div class="register-header">
+                        <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+                        <h2>Đăng Ký</h2>
+                        <p class="text-muted">Tạo tài khoản mới</p>
+                    </div>
+
+                    <div id="alert-container"></div>
+
+                    <form id="registerForm" onsubmit="handleRegister(event)">
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">
+                                <i class="fas fa-user me-2"></i>Họ và tên
+                            </label>
+                            <input type="text" class="form-control" id="fullName" name="fullName" 
+                                   placeholder="Nhập họ và tên" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">
+                                <i class="fas fa-envelope me-2"></i>Email
+                            </label>
+                            <input type="email" class="form-control" id="email" name="email" 
+                                   placeholder="Nhập email của bạn" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">
+                                <i class="fas fa-lock me-2"></i>Mật khẩu
+                            </label>
+                            <input type="password" class="form-control" id="password" name="password" 
+                                   placeholder="Nhập mật khẩu" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="images" class="form-label">
+                                <i class="fas fa-image me-2"></i>Ảnh đại diện (tùy chọn)
+                            </label>
+                            <input type="text" class="form-control" id="images" name="images" 
+                                   placeholder="URL ảnh hoặc tên file">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-register" id="registerBtn">
+                            <i class="fas fa-user-plus me-2"></i>
+                            <span id="registerText">Đăng Ký</span>
+                            <div class="spinner-border spinner-border-sm ms-2 d-none" id="registerSpinner"></div>
+                        </button>
+                    </form>
+
+                    <div class="login-link">
+                        <p>Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
